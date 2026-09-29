@@ -1,0 +1,36 @@
+Disease,Fever,Cough,Fatigue,Difficulty Breathing,Age,Gender
+Influenza,Yes,Yes,Yes,No,20,Male
+Influenza,Yes,Yes,Yes,No,25,Female
+Influenza,Yes,Yes,No,No,30,Male
+Influenza,Yes,Yes,No,No,22,Female
+Influenza,Yes,Yes,Yes,No,35,Male
+Common Cold,No,Yes,Yes,No,18,Female
+Common Cold,No,Yes,No,No,25,Male
+Common Cold,No,Yes,Yes,No,30,Female
+Common Cold,No,Yes,No,No,21,Male
+Common Cold,No,Yes,Yes,No,40,Female
+Asthma,No,Yes,Yes,Yes,22,Female
+Asthma,No,Yes,No,Yes,30,Male
+Asthma,No,Yes,Yes,Yes,28,Female
+Asthma,No,Yes,No,Yes,35,Male
+Asthma,No,Yes,Yes,Yes,19,Female
+Bronchitis,Yes,Yes,Yes,Yes,30,Male
+Bronchitis,Yes,Yes,No,Yes,40,Female
+Bronchitis,Yes,Yes,Yes,Yes,45,Male
+Bronchitis,Yes,Yes,No,Yes,35,Female
+Bronchitis,Yes,Yes,Yes,Yes,50,Male
+Pneumonia,Yes,Yes,Yes,Yes,45,Male
+Pneumonia,Yes,Yes,Yes,Yes,55,Female
+Pneumonia,Yes,Yes,Yes,Yes,60,Male
+Pneumonia,Yes,Yes,No,Yes,50,Female
+Pneumonia,Yes,Yes,Yes,Yes,65,Male
+Tuberculosis,Yes,Yes,Yes,No,40,Female
+Tuberculosis,Yes,Yes,Yes,No,50,Male
+Tuberculosis,Yes,Yes,Yes,No,60,Female
+Tuberculosis,Yes,Yes,Yes,No,55,Male
+Tuberculosis,Yes,Yes,No,No,45,Female
+Allergic Rhinitis,No,Yes,Yes,No,20,Female
+Allergic Rhinitis,No,Yes,No,No,25,Male
+Allergic Rhinitis,No,Yes,Yes,No,30,Female
+Allergic Rhinitis,No,Yes,No,No,18,Male
+Allergic Rhinitis,No,Yes,Yes,No,35,Female
