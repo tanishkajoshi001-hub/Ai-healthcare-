@@ -1,0 +1,3898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Healthcare Centre</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f8fb;
+    color:#1f2937;
+    min-height:100vh;
+}
+
+header{
+    background:#0b7285;
+    color:white;
+    padding:18px 35px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+
+header h1{
+    font-size:25px;
+}
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.hero{
+    text-align:center;
+    padding:45px 20px 30px;
+}
+
+.hero h2{
+    font-size:36px;
+    color:#075985;
+    margin-bottom:12px;
+}
+
+.hero p{
+    color:#64748b;
+    font-size:17px;
+}
+
+.role-grid,
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.card{
+    background:white;
+    border-radius:14px;
+    padding:25px;
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+}
+
+.role-card{
+    text-align:center;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.role-card:hover,
+.feature-card:hover{
+    transform:translateY(-4px);
+}
+
+.icon{
+    font-size:42px;
+    margin-bottom:12px;
+}
+
+.card h3{
+    margin-bottom:10px;
+    color:#075985;
+}
+
+.card p{
+    color:#64748b;
+    line-height:1.5;
+}
+
+button{
+    border:none;
+    border-radius:8px;
+    padding:11px 18px;
+    background:#0b7285;
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+    margin-top:14px;
+}
+
+button:hover{
+    background:#095c6b;
+}
+
+.secondary{
+    background:#64748b;
+}
+
+.danger{
+    background:#dc2626;
+}
+
+.login-box{
+    width:100%;
+    max-width:430px;
+    margin:55px auto;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:6px;
+    font-weight:bold;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:15px;
+    background:white;
+}
+
+.top-actions{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.dashboard-title{
+    color:#075985;
+}
+
+.feature-card{
+    cursor:pointer;
+    transition:.2s;
+}
+
+.screening-box{
+    max-width:800px;
+    margin:25px auto;
+}
+
+.symptoms-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+.symptom{
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    padding:15px;
+    background:#f8fafc;
+}
+
+.result{
+    display:none;
+    margin-top:22px;
+    padding:18px;
+    border-radius:10px;
+    background:#ecfeff;
+    border:1px solid #67e8f9;
+}
+
+.result.show{
+    display:block;
+}
+
+.loading{
+    display:none;
+    margin-top:15px;
+    color:#075985;
+    font-weight:bold;
+}
+
+.loading.show{
+    display:block;
+}
+
+.status{
+    padding:12px;
+    border-radius:8px;
+    margin-top:15px;
+    display:none;
+}
+
+.status.success{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.stat{
+    text-align:center;
+}
+
+.stat-number{
+    font-size:32px;
+    font-weight:bold;
+    color:#0b7285;
+    margin-bottom:5px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    background:white;
+}
+
+th,
+td{
+    padding:12px;
+    border-bottom:1px solid #e2e8f0;
+    text-align:left;
+}
+
+th{
+    background:#0b7285;
+    color:white;
+}
+
+.table-container{
+    overflow-x:auto;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+footer{
+    text-align:center;
+    color:#64748b;
+    padding:35px 15px;
+    font-size:13px;
+}
+
+@media(max-width:600px){
+
+    header{
+        padding:15px;
+    }
+
+    header h1{
+        font-size:20px;
+    }
+
+    .hero h2{
+        font-size:28px;
+    }
+
+    .container{
+        width:94%;
+    }
+}
+
+</style>
+
+
+<style>
+.medicine-shop{
+    display:grid;
+    grid-template-columns:minmax(0,2fr) minmax(320px,1fr);
+    gap:24px;
+    margin-top:20px;
+}
+
+.medicine-products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:18px;
+}
+
+.medicine-card,
+.cart-box,
+.address-box{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+    padding:18px;
+    box-shadow:0 4px 14px rgba(15,23,42,.06);
+}
+
+.medicine-card{
+    display:flex;
+    flex-direction:column;
+}
+
+.medicine-icon{
+    font-size:42px;
+    margin-bottom:8px;
+}
+
+.medicine-card h3{
+    margin:6px 0 10px;
+    color:#0f172a;
+}
+
+.medicine-card p{
+    margin:6px 0;
+    color:#64748b;
+    line-height:1.45;
+}
+
+.medicine-price{
+    font-size:20px;
+    font-weight:700;
+    color:#0b7285;
+    margin:14px 0;
+}
+
+.medicine-card button,
+.cart-action,
+.place-order-btn{
+    border:0;
+    border-radius:8px;
+    padding:10px 14px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.medicine-card button,
+.place-order-btn{
+    background:#0b7285;
+    color:#fff;
+}
+
+.medicine-card button:hover,
+.place-order-btn:hover{
+    opacity:.9;
+}
+
+.cart-box{
+    height:max-content;
+    position:sticky;
+    top:20px;
+}
+
+.cart-item{
+    border-bottom:1px solid #e2e8f0;
+    padding:13px 0;
+}
+
+.cart-item:last-child{
+    border-bottom:0;
+}
+
+.cart-item-name{
+    font-weight:700;
+    color:#0f172a;
+    margin-bottom:5px;
+}
+
+.cart-item small{
+    color:#64748b;
+}
+
+.quantity-controls{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:9px;
+}
+
+.quantity-controls button{
+    border:1px solid #cbd5e1;
+    background:#f8fafc;
+    border-radius:6px;
+    padding:5px 10px;
+    cursor:pointer;
+}
+
+.quantity-controls button:hover{
+    background:#e2e8f0;
+}
+
+.total-box{
+    font-size:21px;
+    font-weight:700;
+    margin:18px 0;
+    color:#0f172a;
+    border-top:1px solid #e2e8f0;
+    padding-top:15px;
+}
+
+.address-box{
+    margin-top:18px;
+    background:#f8fafc;
+    box-shadow:none;
+}
+
+.address-box label{
+    display:block;
+    font-weight:600;
+    margin-top:10px;
+    color:#334155;
+}
+
+.address-box input,
+.address-box textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:10px;
+    margin-top:6px;
+    margin-bottom:8px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font:inherit;
+}
+
+.address-box textarea{
+    resize:vertical;
+}
+
+.order-success{
+    background:#dcfce7;
+    color:#166534;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+    line-height:1.6;
+}
+
+.empty-cart,
+.medicine-empty{
+    color:#64748b;
+    text-align:center;
+    padding:18px;
+}
+
+.medicine-toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:12px;
+}
+
+.medicine-badge{
+    background:#e0f2fe;
+    color:#075985;
+    border-radius:999px;
+    padding:6px 10px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.medicine-error{
+    background:#fef2f2;
+    color:#991b1b;
+    border:1px solid #fecaca;
+    border-radius:10px;
+    padding:14px;
+}
+
+@media(max-width:800px){
+    .medicine-shop{
+        grid-template-columns:1fr;
+    }
+
+    .cart-box{
+        position:static;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>🏥 AI Healthcare Centre</h1>
+
+<span id="headerUser">
+Smart Healthcare System
+</span>
+
+</header>
+
+
+<!-- ================= HOME ================= -->
+
+<section id="homePage" class="page active">
+
+<div class="container">
+
+<div class="hero">
+
+<h2>Welcome to AI Healthcare Centre</h2>
+
+<p>
+Healthcare management with AI-assisted preliminary symptom screening.
+</p>
+
+</div>
+
+<div class="role-grid">
+
+<div class="card role-card" onclick="openLogin('Patient')">
+
+<div class="icon">🧑‍⚕️</div>
+
+<h3>Patient</h3>
+
+<p>
+Access screening, appointments, medical records
+and medicine services.
+</p>
+
+<button>Patient Login</button>
+
+</div>
+
+
+<div class="card role-card" onclick="openLogin('Doctor')">
+
+<div class="icon">👨‍⚕️</div>
+
+<h3>Doctor</h3>
+
+<p>
+View patients, appointments and patient records.
+</p>
+
+<button>Doctor Login</button>
+
+</div>
+
+
+<div class="card role-card" onclick="openLogin('Admin')">
+
+<div class="icon">🛡️</div>
+
+<h3>Admin</h3>
+
+<p>
+Manage doctors, patients, appointments
+and departments.
+</p>
+
+<button>Admin Login</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= LOGIN ================= -->
+
+<section id="loginPage" class="page">
+
+<div class="container">
+
+<div class="card login-box">
+
+<h2 id="loginTitle">Login</h2>
+
+<p id="loginRoleText"></p>
+
+<label>Username</label>
+
+<input
+id="username"
+type="text"
+placeholder="Enter username">
+
+<label>Password</label>
+
+<input
+id="password"
+type="password"
+placeholder="Enter password">
+
+<button onclick="login()">
+Login
+</button>
+
+<button
+class="secondary"
+onclick="showPage('homePage')">
+Back
+</button>
+
+<div id="loginStatus" class="status"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PATIENT ================= -->
+
+<section id="patientPage" class="page">
+
+<div class="container">
+
+<div class="top-actions">
+
+<div>
+
+<h2 class="dashboard-title">
+Patient Dashboard
+</h2>
+
+<p>
+Welcome,
+<span id="patientName">Patient</span>
+</p>
+
+</div>
+
+<button class="secondary" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+
+<div class="card-grid">
+
+<div
+class="card feature-card"
+onclick="showPage('screeningPage')">
+
+<div class="icon">🫁</div>
+
+<h3>Respiratory Disease Screening</h3>
+
+<p>
+Enter symptoms and receive a preliminary
+AI screening result.
+</p>
+
+<button>Start Screening</button>
+
+</div>
+
+
+<div
+class="card feature-card"
+onclick="openAppointments()">
+
+<div class="icon">📅</div>
+
+<h3>Appointments</h3>
+
+<p>
+View and manage appointments.
+</p>
+
+<button>Open</button>
+
+</div>
+
+
+<div
+class="card feature-card"
+onclick="openRecords()">
+
+<div class="icon">📋</div>
+
+<h3>Medical Records</h3>
+
+<p>
+View medical record information.
+</p>
+
+<button>Open</button>
+
+</div>
+
+
+<div
+class="card feature-card"
+onclick="openMedicine()">
+
+<div class="icon">💊</div>
+
+<h3>Medicine Delivery</h3>
+
+<p>
+Explore medicine delivery services.
+</p>
+
+<button>Open</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SCREENING ================= -->
+
+<section id="screeningPage" class="page">
+
+<div class="container">
+
+<div class="card screening-box">
+
+<h2 class="dashboard-title">
+🫁 AI Respiratory Disease Screening
+</h2>
+
+<p>
+Enter basic information and symptoms.
+</p>
+
+
+<label>Age</label>
+
+<input
+id="age"
+type="number"
+min="1"
+max="120"
+placeholder="Enter age">
+
+
+<label>Gender</label>
+
+<select id="gender">
+
+<option value="">
+Select gender
+</option>
+
+<option value="Male">
+Male
+</option>
+
+<option value="Female">
+Female
+</option>
+
+</select>
+
+
+<h3 style="margin-top:25px;color:#075985;">
+Symptoms
+</h3>
+
+
+<div class="symptoms-grid">
+
+
+<div class="symptom">
+
+<label>Fever</label>
+
+<select id="fever">
+
+<option value="No">No</option>
+<option value="Yes">Yes</option>
+
+</select>
+
+</div>
+
+
+<div class="symptom">
+
+<label>Cough</label>
+
+<select id="cough">
+
+<option value="No">No</option>
+<option value="Yes">Yes</option>
+
+</select>
+
+</div>
+
+
+<div class="symptom">
+
+<label>Fatigue</label>
+
+<select id="fatigue">
+
+<option value="No">No</option>
+<option value="Yes">Yes</option>
+
+</select>
+
+</div>
+
+
+<div class="symptom">
+
+<label>Difficulty Breathing</label>
+
+<select id="breathing">
+
+<option value="No">No</option>
+<option value="Yes">Yes</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<button onclick="runAIScreening()">
+🔍 Run AI Screening
+</button>
+
+<button
+class="secondary"
+onclick="showPage('patientPage')">
+Back
+</button>
+
+
+<div id="loading" class="loading">
+⏳ AI is processing...
+</div>
+
+
+<div id="screeningResult" class="result">
+
+<h3>AI Screening Result</h3>
+
+<p id="predictionText"></p>
+
+<p id="resultMessage"></p>
+
+</div>
+
+
+<div id="screeningStatus" class="status"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= DOCTOR ================= -->
+
+<section id="doctorPage" class="page">
+
+<div class="container">
+
+<div class="top-actions">
+
+<div>
+
+<h2 class="dashboard-title">
+Doctor Dashboard
+</h2>
+
+<p>
+Welcome,
+<span id="doctorName">Doctor</span>
+</p>
+
+</div>
+
+<button class="secondary" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+
+<div class="card-grid">
+
+
+<div
+class="card feature-card"
+onclick="loadPatients()">
+
+<div class="icon">👥</div>
+
+<h3>Patients</h3>
+
+<p>
+View registered patients.
+</p>
+
+<button>Open</button>
+
+</div>
+
+
+<div
+class="card feature-card"
+onclick="openAppointments()">
+
+<div class="icon">📅</div>
+
+<h3>Appointments</h3>
+
+<p>
+View patient appointments.
+</p>
+
+<button>Open</button>
+
+</div>
+
+
+<div
+class="card feature-card"
+onclick="loadRecords()">
+
+<div class="icon">📋</div>
+
+<h3>Patient Records</h3>
+
+<p>
+View patient records.
+</p>
+
+<button>Open</button>
+
+</div>
+
+
+<div
+class="card feature-card"
+onclick="showPage('prescriptionPage')">
+
+<div class="icon">💊</div>
+
+<h3>Doctor-approved Prescription</h3>
+
+<p>
+Create prescription information.
+</p>
+
+<button>Open</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= ADMIN ================= -->
+
+<section id="adminPage" class="page">
+
+<div class="container">
+
+<div class="top-actions">
+
+<div>
+
+<h2 class="dashboard-title">
+Admin Dashboard
+</h2>
+
+<p>
+System administration
+</p>
+
+</div>
+
+<button class="secondary" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+
+<div class="card-grid">
+
+
+<div class="card stat">
+
+<div class="stat-number" id="doctorCount">
+0
+</div>
+
+<h3>Doctors</h3>
+
+<p>Registered doctors</p>
+
+</div>
+
+
+<div class="card stat">
+
+<div class="stat-number" id="patientCount">
+0
+</div>
+
+<h3>Patients</h3>
+
+<p>Registered patients</p>
+
+</div>
+
+
+<div class="card stat">
+
+<div class="stat-number" id="appointmentCount">
+0
+</div>
+
+<h3>Appointments</h3>
+
+<p>Scheduled appointments</p>
+
+</div>
+
+
+</div>
+
+
+<div class="card-grid">
+
+
+<div
+class="card feature-card"
+onclick="openDoctorManagement()">
+
+<h3>👨‍⚕️ Doctor Management</h3>
+
+<p>
+Add, view and delete doctors.
+</p>
+
+<button>Manage Doctors</button>
+
+</div>
+
+
+<div
+class="card feature-card"
+onclick="openPatientManagement()">
+
+<h3>👥 Patient Management</h3>
+
+<p>
+View registered patients.
+</p>
+
+<button>Manage Patients</button>
+
+</div>
+
+
+<div
+class="card feature-card"
+onclick="openAppointmentManagement()">
+
+<h3>📅 Appointment Management</h3>
+
+<p>
+View appointments.
+</p>
+
+<button>Manage Appointments</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= DOCTOR MANAGEMENT ================= -->
+
+<section id="doctorManagementPage" class="page">
+
+<div class="container">
+
+<div class="top-actions">
+
+<h2 class="dashboard-title">
+👨‍⚕️ Doctor Management
+</h2>
+
+<button
+class="secondary"
+onclick="showPage('adminPage')">
+Back
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Add Doctor</h3>
+
+<div class="form-grid">
+
+<div>
+
+<label>Doctor Name</label>
+
+<input
+id="doctorNameInput"
+placeholder="Enter doctor name">
+
+</div>
+
+
+<div>
+
+<label>Email</label>
+
+<input
+id="doctorEmailInput"
+placeholder="Enter email">
+
+</div>
+
+
+<div>
+
+<label>Specialization</label>
+
+<input
+id="doctorSpecializationInput"
+placeholder="e.g. Respiratory Specialist">
+
+</div>
+
+</div>
+
+
+<button onclick="addDoctor()">
+➕ Add Doctor
+</button>
+
+<div id="doctorStatus" class="status"></div>
+
+</div>
+
+
+<div class="card" style="margin-top:25px;">
+
+<h3>Registered Doctors</h3>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Specialization</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="doctorTableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PATIENT MANAGEMENT ================= -->
+
+<section id="patientManagementPage" class="page">
+
+<div class="container">
+
+<div class="top-actions">
+
+<h2 class="dashboard-title">
+👥 Patient Management
+</h2>
+
+<button
+class="secondary"
+onclick="showPage('adminPage')">
+Back
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Register Patient</h3>
+
+<div class="form-grid">
+
+<div>
+
+<label>Patient Name</label>
+
+<input
+id="patientNameInput"
+type="text"
+placeholder="Enter patient name">
+
+</div>
+
+
+<div>
+
+<label>Age</label>
+
+<input
+id="patientAgeInput"
+type="number"
+min="1"
+max="120"
+placeholder="Enter age">
+
+</div>
+
+
+<div>
+
+<label>Gender</label>
+
+<select id="patientGenderInput">
+
+<option value="">Select gender</option>
+<option value="Male">Male</option>
+<option value="Female">Female</option>
+<option value="Other">Other</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>Phone Number</label>
+
+<input
+id="patientPhoneInput"
+type="tel"
+inputmode="numeric"
+pattern="[0-9]*"
+maxlength="15"
+placeholder="Enter numbers only"
+oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+
+</div>
+
+
+<div>
+
+<label>Email</label>
+
+<input
+id="patientEmailInput"
+type="email"
+placeholder="Enter email">
+
+</div>
+
+</div>
+
+
+<button onclick="addPatient()">
+➕ Register Patient
+</button>
+
+<div id="patientStatus" class="status"></div>
+
+</div>
+
+
+<div class="card" style="margin-top:25px;">
+
+<h3>Registered Patients</h3>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Age</th>
+<th>Gender</th>
+<th>Phone</th>
+<th>Email</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="patientTableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= APPOINTMENT MANAGEMENT ================= -->
+
+<section id="appointmentManagementPage" class="page">
+
+<div class="container">
+
+<div class="top-actions">
+
+<h2 class="dashboard-title">
+📅 Appointment Management
+</h2>
+
+<button
+class="secondary"
+onclick="showPage('adminPage')">
+Back
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Book Appointment</h3>
+
+<div class="form-grid">
+
+<div>
+<label>Patient Name</label>
+<input
+id="appointmentPatientInput"
+type="text"
+placeholder="Enter patient name">
+</div>
+
+<div>
+<label>Doctor Name</label>
+<input
+id="appointmentDoctorInput"
+type="text"
+placeholder="Enter doctor name">
+</div>
+
+<div>
+<label>Appointment Date</label>
+<input
+id="appointmentDateInput"
+type="date">
+</div>
+
+<div>
+<label>Appointment Time</label>
+<input
+id="appointmentTimeInput"
+type="time">
+</div>
+
+</div>
+
+<button onclick="addAppointment()">
+➕ Book Appointment
+</button>
+
+<div id="appointmentStatus" class="status"></div>
+
+</div>
+
+<div class="card" style="margin-top:25px;">
+
+<h3>Appointments</h3>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Patient</th>
+<th>Doctor</th>
+<th>Date</th>
+<th>Time</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="appointmentTableBody">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PRESCRIPTION ================= -->
+
+<section id="prescriptionPage" class="page">
+
+<div class="container">
+
+<div class="card">
+
+<h2 class="dashboard-title">
+💊 Doctor-approved Prescription
+</h2>
+
+<label>Patient Name</label>
+
+<input
+id="prescriptionPatient"
+placeholder="Patient name">
+
+<label>Medicine</label>
+
+<input
+id="prescriptionMedicine"
+placeholder="Medicine name">
+
+<label>Instructions</label>
+
+<input
+id="prescriptionInstructions"
+placeholder="Instructions">
+
+<button onclick="savePrescription()">
+Save Prescription
+</button>
+
+<button
+class="secondary"
+onclick="showPage('doctorPage')">
+Back
+</button>
+
+<div id="prescriptionStatus" class="status"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= GENERIC PAGE ================= -->
+
+<section id="genericPage" class="page">
+
+<div class="container">
+
+<div class="card">
+
+<h2 id="genericTitle" class="dashboard-title"></h2>
+
+<div id="genericContent" style="margin-top:20px;"></div>
+
+<button
+class="secondary"
+onclick="goBack()">
+Back
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+AI Healthcare Centre © 2026 | College Project
+
+<br>
+
+AI screening is for educational/preliminary
+screening purposes only and is not a medical diagnosis.
+
+</footer>
+
+
+<script>
+
+const API = "http://127.0.0.1:5000";
+
+let selectedRole = "";
+let loggedInUser = "";
+let previousPage = "homePage";
+
+
+/* =========================
+PAGE NAVIGATION
+========================= */
+
+function showPage(pageId){
+
+    document.querySelectorAll(".page").forEach(function(page){
+
+        page.classList.remove("active");
+
+    });
+
+    document.getElementById(pageId).classList.add("active");
+
+    window.scrollTo(0,0);
+}
+
+
+/* =========================
+LOGIN
+========================= */
+
+function openLogin(role){
+
+    selectedRole = role;
+
+    document.getElementById("loginTitle").textContent =
+        role + " Login";
+
+    document.getElementById("loginRoleText").textContent =
+        "Login as " + role;
+
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+
+    showPage("loginPage");
+}
+
+
+async function login(){
+
+    const username =
+        document.getElementById("username").value.trim();
+
+    const password =
+        document.getElementById("password").value.trim();
+
+    const status =
+        document.getElementById("loginStatus");
+
+    if(!username || !password){
+
+        status.className = "status error";
+        status.textContent =
+            "Please enter username and password.";
+
+        return;
+    }
+
+    loggedInUser = username;
+
+    document.getElementById("headerUser").textContent =
+        selectedRole + ": " + username;
+
+
+    /*
+    For now login is simple for the college project.
+    */
+
+    if(selectedRole === "Patient"){
+
+        document.getElementById("patientName").textContent =
+            username;
+
+        showPage("patientPage");
+
+    }
+
+    else if(selectedRole === "Doctor"){
+
+        document.getElementById("doctorName").textContent =
+            username;
+
+        showPage("doctorPage");
+
+    }
+
+    else if(selectedRole === "Admin"){
+
+        showPage("adminPage");
+
+        loadDashboardStats();
+    }
+}
+
+
+function logout(){
+
+    selectedRole = "";
+    loggedInUser = "";
+
+    document.getElementById("headerUser").textContent =
+        "Smart Healthcare System";
+
+    showPage("homePage");
+}
+
+
+/* =========================
+AI SCREENING
+========================= */
+
+async function runAIScreening(){
+
+    const age =
+        document.getElementById("age").value;
+
+    const gender =
+        document.getElementById("gender").value;
+
+    const fever =
+        document.getElementById("fever").value;
+
+    const cough =
+        document.getElementById("cough").value;
+
+    const fatigue =
+        document.getElementById("fatigue").value;
+
+    const breathing =
+        document.getElementById("breathing").value;
+
+
+    const result =
+        document.getElementById("screeningResult");
+
+    const loading =
+        document.getElementById("loading");
+
+    const status =
+        document.getElementById("screeningStatus");
+
+
+    result.classList.remove("show");
+
+    status.className = "status";
+
+
+    if(!age || Number(age)<1 || Number(age)>120){
+
+        status.className = "status error";
+
+        status.textContent =
+            "Please enter a valid age.";
+
+        return;
+    }
+
+
+    if(!gender){
+
+        status.className = "status error";
+
+        status.textContent =
+            "Please select gender.";
+
+        return;
+    }
+
+
+    loading.classList.add("show");
+
+
+    const patientData = {
+
+        Age:Number(age),
+
+        Gender:gender,
+
+        Fever:fever,
+
+        Cough:cough,
+
+        Fatigue:fatigue,
+
+        "Difficulty Breathing":breathing
+    };
+
+
+    try{
+
+        const response =
+            await fetch(API + "/predict",{
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify(patientData)
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        loading.classList.remove("show");
+
+
+        if(!response.ok || !data.success){
+
+            throw new Error(
+                data.error || "Prediction failed"
+            );
+        }
+
+
+        document.getElementById("predictionText").innerHTML =
+            "<strong>Preliminary screening result:</strong> "
+            + data.prediction;
+
+
+        document.getElementById("resultMessage").textContent =
+            data.message;
+
+
+        result.classList.add("show");
+
+    }
+
+    catch(error){
+
+        loading.classList.remove("show");
+
+        status.className = "status error";
+
+        status.innerHTML =
+            "<strong>Backend connection failed.</strong><br>"
+            + error.message
+            + "<br><br>"
+            + "Make sure python app.py is running.";
+
+    }
+}
+
+
+/* =========================
+ADMIN DASHBOARD
+========================= */
+
+async function loadDashboardStats(){
+
+    try{
+
+        const response =
+            await fetch(API + "/stats");
+
+        const data =
+            await response.json();
+
+        if(data.success){
+
+            document.getElementById("doctorCount").textContent =
+                data.doctors;
+
+            document.getElementById("patientCount").textContent =
+                data.patients;
+
+            document.getElementById("appointmentCount").textContent =
+                data.appointments;
+        }
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+    }
+}
+
+
+/* =========================
+DOCTOR MANAGEMENT
+========================= */
+
+function openDoctorManagement(){
+
+    previousPage = "adminPage";
+
+    showPage("doctorManagementPage");
+
+    loadDoctors();
+}
+
+
+async function loadDoctors(){
+
+    const table =
+        document.getElementById("doctorTableBody");
+
+    table.innerHTML =
+        "<tr><td colspan='5'>Loading...</td></tr>";
+
+
+    try{
+
+        const response =
+            await fetch(API + "/doctors");
+
+        const data =
+            await response.json();
+
+
+        table.innerHTML = "";
+
+
+        if(!data.success){
+
+            throw new Error(data.error);
+
+        }
+
+
+        data.doctors.forEach(function(doctor){
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>${doctor.id}</td>
+
+                <td>${doctor.name}</td>
+
+                <td>${doctor.email}</td>
+
+                <td>${doctor.specialization}</td>
+
+                <td>
+                    <button
+                    onclick="editDoctor(${doctor.id})">
+                    ✏️ Edit
+                    </button>
+
+                    <button
+                    class="danger"
+                    onclick="deleteDoctor(${doctor.id})">
+                    🗑️ Delete
+                    </button>
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        });
+
+
+        if(data.doctors.length === 0){
+
+            table.innerHTML =
+                "<tr><td colspan='5'>No doctors found.</td></tr>";
+
+        }
+
+    }
+
+    catch(error){
+
+        table.innerHTML =
+            "<tr><td colspan='5'>Could not load doctors.</td></tr>";
+
+    }
+}
+
+
+async function addDoctor(){
+
+    const name =
+        document.getElementById("doctorNameInput").value.trim();
+
+    const email =
+        document.getElementById("doctorEmailInput").value.trim();
+
+    const specialization =
+        document.getElementById("doctorSpecializationInput").value.trim();
+
+    const status =
+        document.getElementById("doctorStatus");
+
+
+    if(!name || !email || !specialization){
+
+        status.className = "status error";
+
+        status.textContent =
+            "Please fill all doctor details.";
+
+        return;
+    }
+
+
+    try{
+
+        const response =
+            await fetch(API + "/doctors",{
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+
+                    name:name,
+
+                    email:email,
+
+                    specialization:specialization
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok || !data.success){
+
+            throw new Error(
+                data.error || "Could not add doctor"
+            );
+
+        }
+
+
+        status.className = "status success";
+
+        status.textContent =
+            "Doctor added successfully!";
+
+
+        document.getElementById("doctorNameInput").value = "";
+
+        document.getElementById("doctorEmailInput").value = "";
+
+        document.getElementById("doctorSpecializationInput").value = "";
+
+
+        loadDoctors();
+
+        loadDashboardStats();
+
+    }
+
+    catch(error){
+
+        status.className = "status error";
+
+        status.textContent = error.message;
+
+    }
+}
+
+
+async function editDoctor(id){
+
+    try{
+
+        const response =
+            await fetch(API + "/doctors");
+
+        const data =
+            await response.json();
+
+        if(!response.ok || !data.success){
+            throw new Error(data.error || "Could not load doctors");
+        }
+
+        const doctor =
+            data.doctors.find(function(item){
+                return Number(item.id) === Number(id);
+            });
+
+        if(!doctor){
+            throw new Error("Doctor not found.");
+        }
+
+        const name = prompt("Doctor Name:", doctor.name || "");
+        if(name === null) return;
+
+        const specialization = prompt(
+            "Specialization:",
+            doctor.specialization || ""
+        );
+        if(specialization === null) return;
+
+        const email = prompt("Email:", doctor.email || "");
+        if(email === null) return;
+
+        const phone = prompt("Phone:", doctor.phone || "");
+        if(phone === null) return;
+
+        const availability = prompt(
+            "Availability:",
+            doctor.availability || ""
+        );
+        if(availability === null) return;
+
+        if(!name.trim() || !specialization.trim()){
+            alert("Doctor name and specialization are required.");
+            return;
+        }
+
+        const updateResponse =
+            await fetch(API + "/doctors/" + id,{
+                method:"PUT",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    name:name.trim(),
+                    specialization:specialization.trim(),
+                    email:email.trim(),
+                    phone:phone.trim(),
+                    availability:availability.trim()
+                })
+            });
+
+        const updateData =
+            await updateResponse.json();
+
+        if(!updateResponse.ok || !updateData.success){
+            throw new Error(
+                updateData.error || "Could not update doctor"
+            );
+        }
+
+        alert("Doctor details updated successfully!");
+
+        loadDoctors();
+        loadDashboardStats();
+
+    }
+    catch(error){
+
+        alert(error.message);
+
+    }
+}
+
+
+async function deleteDoctor(id){
+
+    if(!confirm("Delete this doctor?")){
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(API + "/doctors/" + id,{
+
+                method:"DELETE"
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if(!data.success){
+
+            throw new Error(data.error);
+
+        }
+
+
+        loadDoctors();
+
+        loadDashboardStats();
+
+    }
+
+    catch(error){
+
+        alert(error.message);
+
+    }
+}
+
+
+/* =========================
+PATIENT MANAGEMENT
+========================= */
+
+function openPatientManagement(){
+
+    showPage("patientManagementPage");
+
+    loadPatients();
+
+}
+
+
+async function loadPatients(){
+
+    previousPage = selectedRole === "Doctor"
+        ? "doctorPage"
+        : "adminPage";
+
+    try{
+
+        const response =
+            await fetch(
+                API + "/patients" +
+                (selectedRole === "Doctor"
+                    ? "?doctor=" + encodeURIComponent(loggedInUser)
+                    : "")
+            );
+
+        const data =
+            await response.json();
+
+        if(!response.ok || !data.success){
+
+            throw new Error(
+                data.error || "Could not load patients."
+            );
+
+        }
+
+        const patients = data.patients || [];
+
+
+        // Doctor view: read-only patient list.
+        if(selectedRole === "Doctor"){
+
+            showPage("genericPage");
+
+            document.getElementById("genericTitle").textContent =
+                "👥 Patients";
+
+            let html = `
+                <div class="table-container">
+                <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+            `;
+
+            patients.forEach(function(patient){
+
+                html += `
+                    <tr>
+                        <td>${patient.id}</td>
+                        <td>${patient.name || ""}</td>
+                        <td>${patient.age ?? ""}</td>
+                        <td>${patient.gender || ""}</td>
+                        <td>${patient.phone || ""}</td>
+                        <td>${patient.email || ""}</td>
+                        <td><button onclick="viewPatientRecords('${encodeURIComponent(patient.name)}')">📋 Records</button></td>
+                    </tr>
+                `;
+
+            });
+
+            html += `
+                </tbody>
+                </table>
+                </div>
+            `;
+
+            document.getElementById("genericContent").innerHTML = html;
+
+            return;
+        }
+
+
+        // Admin view: show Edit and Delete buttons.
+        showPage("patientManagementPage");
+
+        const tableBody =
+            document.getElementById("patientTableBody");
+
+        tableBody.innerHTML = patients.map(function(patient){
+
+            return `
+                <tr>
+                    <td>${patient.id}</td>
+                    <td>${patient.name || ""}</td>
+                    <td>${patient.age ?? ""}</td>
+                    <td>${patient.gender || ""}</td>
+                    <td>${patient.phone || ""}</td>
+                    <td>${patient.email || ""}</td>
+
+                    <td>
+                        <button
+                            onclick="editPatient(${patient.id})">
+                            ✏️ Edit
+                        </button>
+
+                        <button
+                            class="danger"
+                            onclick="deletePatient(${patient.id})">
+                            🗑️ Delete
+                        </button>
+                    </td>
+                </tr>
+            `;
+
+        }).join("");
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        if(selectedRole === "Admin"){
+
+            document.getElementById("patientTableBody").innerHTML =
+                `<tr><td colspan="7">Could not load patients: ${error.message}</td></tr>`;
+
+        }
+        else{
+
+            document.getElementById("genericContent").innerHTML =
+                `<p>Could not load patients: ${error.message}</p>`;
+
+        }
+
+    }
+}
+
+
+async function addPatient(){
+
+    const name =
+        document.getElementById("patientNameInput").value.trim();
+
+    const age =
+        document.getElementById("patientAgeInput").value;
+
+    const gender =
+        document.getElementById("patientGenderInput").value;
+
+    const phoneInput =
+        document.getElementById("patientPhoneInput");
+
+    const phone =
+        phoneInput.value.trim();
+
+    const email =
+        document.getElementById("patientEmailInput").value.trim();
+
+    const status =
+        document.getElementById("patientStatus");
+
+
+    if(!name){
+
+        status.className = "status error";
+        status.textContent = "Patient name is required.";
+        return;
+
+    }
+
+
+    if(phone && !/^\d+$/.test(phone)){
+
+        status.className = "status error";
+        status.textContent =
+            "Phone number must contain numbers only.";
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(API + "/patients", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    name: name,
+                    age: age ? Number(age) : null,
+                    gender: gender,
+                    phone: phone,
+                    email: email
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok || !data.success){
+
+            throw new Error(
+                data.error || "Could not register patient."
+            );
+
+        }
+
+
+        status.className = "status success";
+        status.textContent =
+            "Patient registered successfully.";
+
+
+        document.getElementById("patientNameInput").value = "";
+        document.getElementById("patientAgeInput").value = "";
+        document.getElementById("patientGenderInput").value = "";
+        document.getElementById("patientPhoneInput").value = "";
+        document.getElementById("patientEmailInput").value = "";
+
+
+        await loadPatients();
+
+        if(typeof loadDashboardStats === "function"){
+            loadDashboardStats();
+        }
+
+    }
+
+    catch(error){
+
+        status.className = "status error";
+        status.textContent = error.message;
+
+    }
+
+}
+
+
+async function deletePatient(patientId){
+
+    const confirmed =
+        confirm("Are you sure you want to delete this patient?");
+
+    if(!confirmed){
+        return;
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                API + "/patients/" + patientId,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok || !data.success){
+
+            throw new Error(
+                data.error || "Could not delete patient."
+            );
+
+        }
+
+
+        alert("Patient deleted successfully.");
+
+        await loadPatients();
+
+        if(typeof loadDashboardStats === "function"){
+            loadDashboardStats();
+        }
+
+    }
+
+    catch(error){
+
+        alert(error.message);
+
+    }
+
+}
+
+
+async function editPatient(patientId){
+
+    // Get current patient details from the API.
+    let patient;
+
+    try{
+
+        const response =
+            await fetch(API + "/patients");
+
+        const data =
+            await response.json();
+
+        if(!response.ok || !data.success){
+            throw new Error(
+                data.error || "Could not load patient details."
+            );
+        }
+
+        patient =
+            (data.patients || []).find(
+                p => Number(p.id) === Number(patientId)
+            );
+
+    }
+    catch(error){
+
+        alert(error.message);
+        return;
+
+    }
+
+
+    if(!patient){
+
+        alert("Patient not found.");
+        return;
+
+    }
+
+
+    const name =
+        prompt(
+            "Patient name:",
+            patient.name || ""
+        );
+
+    if(name === null){
+        return;
+    }
+
+
+    const age =
+        prompt(
+            "Patient age:",
+            patient.age ?? ""
+        );
+
+    if(age === null){
+        return;
+    }
+
+
+    const gender =
+        prompt(
+            "Gender (Male/Female/Other):",
+            patient.gender || ""
+        );
+
+    if(gender === null){
+        return;
+    }
+
+
+    const phone =
+        prompt(
+            "Phone number (numbers only):",
+            patient.phone || ""
+        );
+
+    if(phone === null){
+        return;
+    }
+
+
+    if(phone && !/^\d+$/.test(phone)){
+
+        alert("Phone number must contain numbers only.");
+        return;
+
+    }
+
+
+    const email =
+        prompt(
+            "Email:",
+            patient.email || ""
+        );
+
+    if(email === null){
+        return;
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                API + "/patients/" + patientId,
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        name: name.trim(),
+                        age: age.trim()
+                            ? Number(age)
+                            : null,
+                        gender: gender.trim(),
+                        phone: phone.trim(),
+                        email: email.trim()
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok || !data.success){
+
+            throw new Error(
+                data.error || "Could not update patient."
+            );
+
+        }
+
+
+        alert("Patient details updated successfully.");
+
+        await loadPatients();
+
+    }
+
+    catch(error){
+
+        alert(error.message);
+
+    }
+
+}
+
+
+/* =========================
+APPOINTMENTS
+========================= */
+
+function openAppointmentManagement(){
+
+    previousPage = "adminPage";
+
+    showPage("appointmentManagementPage");
+
+    loadAppointments();
+
+}
+
+
+function openAppointments(){
+
+    previousPage =
+        selectedRole === "Doctor"
+        ? "doctorPage"
+        : selectedRole === "Patient"
+        ? "patientPage"
+        : "adminPage";
+
+    showPage("genericPage");
+
+    document.getElementById("genericTitle").textContent =
+        selectedRole === "Doctor"
+            ? "📅 Doctor Appointments"
+            : "📅 My Appointments";
+
+    document.getElementById("genericContent").innerHTML =
+        "<p>Loading appointments...</p>";
+
+    loadAppointments();
+
+}
+
+
+async function loadAppointments(){
+
+    try{
+
+        let appointmentQuery = "";
+
+        if(selectedRole === "Doctor"){
+            appointmentQuery =
+                "?doctor=" + encodeURIComponent(loggedInUser);
+        }
+        else if(selectedRole === "Patient"){
+            appointmentQuery =
+                "?patient=" + encodeURIComponent(loggedInUser);
+        }
+
+        const response =
+            await fetch(
+                API + "/appointments" + appointmentQuery
+            );
+
+        const data =
+            await response.json();
+
+        if(!response.ok || !data.success){
+            throw new Error(
+                data.error || "Could not load appointments."
+            );
+        }
+
+        const appointments = data.appointments || [];
+
+        // Admin appointment management
+        const tableBody =
+            document.getElementById("appointmentTableBody");
+
+        if(tableBody &&
+           document.getElementById("appointmentManagementPage")
+           .classList.contains("active")){
+
+            tableBody.innerHTML = appointments.map(function(a){
+
+                return `
+                    <tr>
+                        <td>${a.id}</td>
+                        <td>${a.patient_name || ""}</td>
+                        <td>${a.doctor_name || ""}</td>
+                        <td>${a.appointment_date || ""}</td>
+                        <td>${a.appointment_time || ""}</td>
+                        <td>${a.status || "Scheduled"}</td>
+                        <td>
+                            <button onclick="editAppointment(${a.id})">
+                                ✏️ Edit
+                            </button>
+                            <button onclick="rescheduleAppointment(${a.id})">
+                                🔄 Reschedule
+                            </button>
+                            <button
+                                class="danger"
+                                onclick="deleteAppointment(${a.id})">
+                                🗑️ Delete
+                            </button>
+                        </td>
+                    </tr>
+                `;
+
+            }).join("");
+
+            if(appointments.length === 0){
+                tableBody.innerHTML =
+                    `<tr><td colspan="7">No appointments found.</td></tr>`;
+            }
+        }
+
+        // Patient/Doctor generic view
+        if(document.getElementById("genericPage")
+            .classList.contains("active")){
+
+            let html = `
+                <div class="table-container">
+                <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    ${selectedRole === "Doctor" ? "<th>Action</th>" : ""}
+                </tr>
+                </thead>
+                <tbody>
+            `;
+
+            appointments.forEach(function(a){
+
+                html += `
+                    <tr>
+                        <td>${a.id}</td>
+                        <td>${a.patient_name || ""}</td>
+                        <td>${a.doctor_name || ""}</td>
+                        <td>${a.appointment_date || ""}</td>
+                        <td>${a.appointment_time || ""}</td>
+                        <td>${a.status || "Scheduled"}</td>
+                        ${selectedRole === "Doctor" ? `
+                        <td>
+                            <button onclick="editAppointment(${a.id})">✏️ Edit</button>
+                            <button onclick="rescheduleAppointment(${a.id})">🔄 Reschedule</button>
+                        </td>` : ""}
+                    </tr>
+                `;
+
+            });
+
+            html += `</tbody></table></div>`;
+
+            if(appointments.length === 0){
+                html = "<p>No appointments found.</p>";
+            }
+
+            document.getElementById("genericContent").innerHTML = html;
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        if(document.getElementById("appointmentTableBody")){
+            document.getElementById("appointmentTableBody").innerHTML =
+                `<tr><td colspan="7">Could not load appointments: ${error.message}</td></tr>`;
+        }
+
+        if(document.getElementById("genericPage")
+            .classList.contains("active")){
+            document.getElementById("genericContent").innerHTML =
+                "Could not load appointments: " + error.message;
+        }
+    }
+}
+
+
+async function addAppointment(){
+
+    const patientName =
+        document.getElementById("appointmentPatientInput")
+        .value.trim();
+
+    const doctorName =
+        document.getElementById("appointmentDoctorInput")
+        .value.trim();
+
+    const date =
+        document.getElementById("appointmentDateInput")
+        .value;
+
+    const time =
+        document.getElementById("appointmentTimeInput")
+        .value;
+
+    const status =
+        document.getElementById("appointmentStatus");
+
+    if(!patientName || !doctorName || !date || !time){
+        status.className = "status error";
+        status.textContent =
+            "Please fill patient, doctor, date and time.";
+        return;
+    }
+
+    try{
+
+        const response = await fetch(API + "/appointments", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                patient_name: patientName,
+                doctor_name: doctorName,
+                appointment_date: date,
+                appointment_time: time,
+                status: "Scheduled"
+            })
+        });
+
+        const data = await response.json();
+
+        if(!response.ok || !data.success){
+            throw new Error(
+                data.error || "Could not book appointment."
+            );
+        }
+
+        status.className = "status success";
+        status.textContent =
+            "Appointment booked successfully.";
+
+        document.getElementById("appointmentPatientInput").value = "";
+        document.getElementById("appointmentDoctorInput").value = "";
+        document.getElementById("appointmentDateInput").value = "";
+        document.getElementById("appointmentTimeInput").value = "";
+
+        await loadAppointments();
+
+        if(typeof loadDashboardStats === "function"){
+            loadDashboardStats();
+        }
+
+    }
+    catch(error){
+
+        status.className = "status error";
+        status.textContent = error.message;
+
+    }
+}
+
+
+async function editAppointment(appointmentId){
+
+    const appointment = await findAppointment(appointmentId);
+
+    if(!appointment){
+        alert("Appointment not found.");
+        return;
+    }
+
+    const patientName = prompt(
+        "Patient name:",
+        appointment.patient_name || ""
+    );
+
+    if(patientName === null){ return; }
+
+    const doctorName = prompt(
+        "Doctor name:",
+        appointment.doctor_name || ""
+    );
+
+    if(doctorName === null){ return; }
+
+    const date = prompt(
+        "Appointment date (YYYY-MM-DD):",
+        appointment.appointment_date || ""
+    );
+
+    if(date === null){ return; }
+
+    const time = prompt(
+        "Appointment time (HH:MM):",
+        appointment.appointment_time || ""
+    );
+
+    if(time === null){ return; }
+
+    await updateAppointment(
+        appointmentId,
+        patientName,
+        doctorName,
+        date,
+        time,
+        appointment.status || "Scheduled"
+    );
+}
+
+
+async function rescheduleAppointment(appointmentId){
+
+    const appointment = await findAppointment(appointmentId);
+
+    if(!appointment){
+        alert("Appointment not found.");
+        return;
+    }
+
+    const newDate = prompt(
+        "Enter new appointment date (YYYY-MM-DD):",
+        appointment.appointment_date || ""
+    );
+
+    if(newDate === null){ return; }
+
+    const newTime = prompt(
+        "Enter new appointment time (HH:MM):",
+        appointment.appointment_time || ""
+    );
+
+    if(newTime === null){ return; }
+
+    await updateAppointment(
+        appointmentId,
+        appointment.patient_name,
+        appointment.doctor_name,
+        newDate,
+        newTime,
+        "Rescheduled"
+    );
+}
+
+
+async function updateAppointment(
+    appointmentId,
+    patientName,
+    doctorName,
+    date,
+    time,
+    statusValue
+){
+
+    if(!patientName.trim() ||
+       !doctorName.trim() ||
+       !date.trim() ||
+       !time.trim()){
+
+        alert("All appointment details are required.");
+        return;
+    }
+
+    try{
+
+        const response = await fetch(
+            API + "/appointments/" + appointmentId,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    patient_name: patientName.trim(),
+                    doctor_name: doctorName.trim(),
+                    appointment_date: date.trim(),
+                    appointment_time: time.trim(),
+                    status: statusValue
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if(!response.ok || !data.success){
+            throw new Error(
+                data.error || "Could not update appointment."
+            );
+        }
+
+        alert(data.message || "Appointment updated successfully.");
+
+        await loadAppointments();
+
+    }
+    catch(error){
+        alert(error.message);
+    }
+}
+
+
+async function findAppointment(appointmentId){
+
+    try{
+
+        const response = await fetch(API + "/appointments");
+        const data = await response.json();
+
+        if(!response.ok || !data.success){
+            throw new Error(
+                data.error || "Could not load appointment."
+            );
+        }
+
+        return (data.appointments || []).find(function(a){
+            return Number(a.id) === Number(appointmentId);
+        });
+
+    }
+    catch(error){
+        alert(error.message);
+        return null;
+    }
+}
+
+
+async function deleteAppointment(appointmentId){
+
+    if(!confirm("Are you sure you want to delete this appointment?")){
+        return;
+    }
+
+    try{
+
+        const response = await fetch(
+            API + "/appointments/" + appointmentId,
+            {
+                method: "DELETE"
+            }
+        );
+
+        const data = await response.json();
+
+        if(!response.ok || !data.success){
+            throw new Error(
+                data.error || "Could not delete appointment."
+            );
+        }
+
+        alert("Appointment deleted successfully.");
+
+        await loadAppointments();
+
+        if(typeof loadDashboardStats === "function"){
+            loadDashboardStats();
+        }
+
+    }
+    catch(error){
+        alert(error.message);
+    }
+}
+
+
+/* =========================
+RECORDS
+========================= */
+
+function openRecords(){
+    previousPage = "patientPage";
+    showPage("genericPage");
+    document.getElementById("genericTitle").textContent = "📋 Medical Records";
+    document.getElementById("genericContent").innerHTML = "<p>Loading medical records...</p>";
+    loadMedicalRecords();
+}
+
+async function loadRecords(){
+    previousPage = "doctorPage";
+    showPage("genericPage");
+    document.getElementById("genericTitle").textContent = "📋 Patient Records";
+    document.getElementById("genericContent").innerHTML = "<p>Loading patient records...</p>";
+    await loadMedicalRecords();
+}
+
+async function viewPatientRecords(encodedName){
+    const patientName = decodeURIComponent(encodedName);
+    previousPage = "doctorPage";
+    showPage("genericPage");
+    document.getElementById("genericTitle").textContent = "📋 Records: " + patientName;
+    document.getElementById("genericContent").innerHTML = "<p>Loading patient records...</p>";
+    await loadMedicalRecords(patientName);
+}
+
+async function loadMedicalRecords(patientName=""){
+    try{
+        const params = new URLSearchParams();
+        if(selectedRole === "Doctor") params.set("doctor", loggedInUser);
+        if(patientName) params.set("patient", patientName);
+
+        const query = params.toString() ? "?" + params.toString() : "";
+
+        const [recordResponse, prescriptionResponse] = await Promise.all([
+            fetch(API + "/medical-records" + query),
+            fetch(API + "/prescriptions" + query)
+        ]);
+
+        const recordData = await recordResponse.json();
+        const prescriptionData = await prescriptionResponse.json();
+
+        if(!recordResponse.ok || !recordData.success){
+            throw new Error(recordData.error || "Could not load medical records.");
+        }
+
+        if(!prescriptionResponse.ok || !prescriptionData.success){
+            throw new Error(prescriptionData.error || "Could not load prescriptions.");
+        }
+
+        const records = recordData.medical_records || [];
+        const prescriptions = prescriptionData.prescriptions || [];
+        const content = document.getElementById("genericContent");
+
+        if(records.length === 0 && prescriptions.length === 0){
+            content.innerHTML = patientName
+                ? `<p>No medical records or prescriptions found for <strong>${patientName}</strong>.</p>`
+                : "<p>No medical records or prescriptions found.</p>";
+            return;
+        }
+
+        let html = "";
+
+        html += `<h3>📋 Medical Records</h3>`;
+
+        if(records.length === 0){
+            html += `<p>No medical records found.</p>`;
+        } else {
+            html += `
+                <div class="table-container">
+                <table>
+                <thead><tr>
+                    <th>ID</th><th>Patient</th><th>Doctor</th>
+                    <th>Diagnosis</th><th>Notes</th><th>Date</th>
+                </tr></thead><tbody>`;
+
+            records.forEach(function(record){
+                html += `
+                    <tr>
+                        <td>${record.id}</td>
+                        <td>${record.patient_name || ""}</td>
+                        <td>${record.doctor_name || ""}</td>
+                        <td>${record.diagnosis || ""}</td>
+                        <td>${record.notes || ""}</td>
+                        <td>${record.record_date || ""}</td>
+                    </tr>`;
+            });
+
+            html += `</tbody></table></div>`;
+        }
+
+        html += `<h3 style="margin-top:25px;">💊 Doctor-approved Prescriptions</h3>`;
+
+        if(prescriptions.length === 0){
+            html += `<p>No prescriptions found.</p>`;
+        } else {
+            html += `
+                <div class="table-container">
+                <table>
+                <thead><tr>
+                    <th>ID</th><th>Patient</th><th>Doctor</th>
+                    <th>Medicine</th><th>Dosage</th><th>Instructions</th>
+                </tr></thead><tbody>`;
+
+            prescriptions.forEach(function(prescription){
+                html += `
+                    <tr>
+                        <td>${prescription.id}</td>
+                        <td>${prescription.patient_name || ""}</td>
+                        <td>${prescription.doctor_name || ""}</td>
+                        <td>${prescription.medicine || ""}</td>
+                        <td>${prescription.dosage || ""}</td>
+                        <td>${prescription.instructions || ""}</td>
+                    </tr>`;
+            });
+
+            html += `</tbody></table></div>`;
+        }
+
+        content.innerHTML = html;
+    }
+    catch(error){
+        console.error(error);
+        document.getElementById("genericContent").innerHTML =
+            "Could not load patient records: " + error.message;
+    }
+}
+
+/* =========================
+MEDICINE DELIVERY - UPDATED
+========================= */
+
+/* =========================================================
+   MEDICINE DELIVERY - UPDATED
+========================================================= */
+
+let medicineCart = [];
+
+
+/* =========================================================
+   OPEN MEDICINE DELIVERY
+========================================================= */
+
+function openMedicine(){
+
+    previousPage =
+        selectedRole === "Doctor"
+        ? "doctorPage"
+        : "patientPage";
+
+    showPage("genericPage");
+
+    document.getElementById("genericTitle").textContent =
+        "💊 Medicine Delivery";
+
+    document.getElementById("genericContent").innerHTML = `
+
+        <div class="card">
+
+            <div class="medicine-toolbar">
+                <div>
+                    <h2 style="margin-bottom:5px;">💊 Online Medicine Store</h2>
+                    <p style="margin:0;color:#64748b;">
+                        Buy medicines prescribed by your doctor and request home delivery.
+                    </p>
+                </div>
+
+                <div class="medicine-badge">
+                    🛒 <span id="medicineCartCount">0</span> item(s)
+                </div>
+            </div>
+
+            <div class="medicine-shop">
+
+                <div>
+                    <h3>Available Medicines</h3>
+
+                    <div id="medicineProducts" class="medicine-products">
+                        <p>Loading prescribed medicines...</p>
+                    </div>
+                </div>
+
+                <div class="cart-box">
+
+                    <h2 style="margin-top:0;">🛒 Your Cart</h2>
+
+                    <div id="medicineCart">
+                        <div class="empty-cart">
+                            Your cart is empty.
+                        </div>
+                    </div>
+
+                    <div id="medicineTotal" class="total-box">
+                        Total: ₹0
+                    </div>
+
+                    <div class="address-box">
+
+                        <h3 style="margin-top:0;">📍 Delivery Address</h3>
+
+                        <label for="deliveryName">Full Name</label>
+                        <input
+                            id="deliveryName"
+                            type="text"
+                            placeholder="Enter your name">
+
+                        <label for="deliveryPhone">Phone Number</label>
+                        <input
+                            id="deliveryPhone"
+                            type="tel"
+                            inputmode="numeric"
+                            maxlength="15"
+                            placeholder="Numbers only"
+                            oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+
+                        <label for="deliveryAddress">Address</label>
+                        <textarea
+                            id="deliveryAddress"
+                            rows="4"
+                            placeholder="House number, street, area"></textarea>
+
+                        <label for="deliveryCity">City</label>
+                        <input
+                            id="deliveryCity"
+                            type="text"
+                            placeholder="Enter city">
+
+                        <label for="deliveryPincode">Pincode</label>
+                        <input
+                            id="deliveryPincode"
+                            type="tel"
+                            inputmode="numeric"
+                            maxlength="6"
+                            placeholder="6 digit pincode"
+                            oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+
+                        <button
+                            class="place-order-btn"
+                            style="width:100%;margin-top:8px;"
+                            onclick="placeMedicineOrder()">
+                            🚚 Place Medicine Order
+                        </button>
+
+                        <div
+                            id="medicineOrderSuccess"
+                            class="order-success"
+                            style="display:none;">
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="secondary"
+                        onclick="goBack()"
+                        style="margin-top:12px;width:100%;">
+                        ← Back
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+    medicineCart = [];
+    renderMedicineCart();
+    loadMedicineProducts();
+}
+
+
+/* =========================================================
+   LOAD PATIENT PRESCRIPTIONS
+========================================================= */
+
+async function loadMedicineProducts(){
+
+    const products =
+        document.getElementById("medicineProducts");
+
+    try{
+
+        const response =
+            await fetch(
+                API +
+                "/prescriptions?patient=" +
+                encodeURIComponent(loggedInUser)
+            );
+
+        const data = await response.json();
+
+        if(!response.ok || !data.success){
+            throw new Error(
+                data.error || "Could not load medicines."
+            );
+        }
+
+        const prescriptions = data.prescriptions || [];
+
+        if(prescriptions.length === 0){
+
+            products.innerHTML = `
+                <div class="medicine-empty">
+                    <h3>No prescribed medicines</h3>
+                    <p>Your doctor has not added any medicines yet.</p>
+                </div>
+            `;
+
+            return;
+        }
+
+        products.innerHTML =
+            prescriptions.map(function(p){
+
+                return `
+                    <div class="medicine-card">
+
+                        <div class="medicine-icon">💊</div>
+
+                        <h3>${escapeHtml(p.medicine)}</h3>
+
+                        <p>
+                            <strong>Doctor:</strong>
+                            ${escapeHtml(p.doctor_name)}
+                        </p>
+
+                        <p>
+                            <strong>Dosage:</strong>
+                            ${escapeHtml(p.dosage || "As prescribed")}
+                        </p>
+
+                        <p>
+                            <strong>Instructions:</strong>
+                            ${escapeHtml(
+                                p.instructions ||
+                                "Follow doctor's instructions."
+                            )}
+                        </p>
+
+                        <div class="medicine-price">
+                            ₹100
+                        </div>
+
+                        <button
+                            onclick='addToCart(${JSON.stringify({
+                                id: p.id,
+                                medicine: p.medicine,
+                                doctor: p.doctor_name,
+                                dosage: p.dosage || "",
+                                price: 100
+                            })})'>
+                            🛒 Add to Cart
+                        </button>
+
+                    </div>
+                `;
+
+            }).join("");
+
+    }
+    catch(error){
+
+        products.innerHTML = `
+            <div class="medicine-error">
+                <strong>Could not load prescribed medicines.</strong>
+                <br>
+                ${escapeHtml(error.message)}
+            </div>
+        `;
+    }
+}
+
+
+/* =========================================================
+   ADD TO CART
+========================================================= */
+
+function addToCart(medicine){
+
+    const existing =
+        medicineCart.find(
+            item => item.id === medicine.id
+        );
+
+    if(existing){
+        existing.quantity++;
+    }
+    else{
+        medicineCart.push({
+            id: medicine.id,
+            medicine: medicine.medicine,
+            doctor: medicine.doctor,
+            dosage: medicine.dosage,
+            price: medicine.price,
+            quantity: 1
+        });
+    }
+
+    renderMedicineCart();
+}
+
+
+/* =========================================================
+   CHANGE QUANTITY
+========================================================= */
+
+function changeMedicineQuantity(id, change){
+
+    const item =
+        medicineCart.find(
+            medicine => medicine.id === id
+        );
+
+    if(!item){
+        return;
+    }
+
+    item.quantity += change;
+
+    if(item.quantity <= 0){
+        medicineCart =
+            medicineCart.filter(
+                medicine => medicine.id !== id
+            );
+    }
+
+    renderMedicineCart();
+}
+
+
+/* =========================================================
+   REMOVE FROM CART
+========================================================= */
+
+function removeFromCart(id){
+
+    medicineCart =
+        medicineCart.filter(
+            item => item.id !== id
+        );
+
+    renderMedicineCart();
+}
+
+
+/* =========================================================
+   DISPLAY CART
+========================================================= */
+
+function renderMedicineCart(){
+
+    const cart =
+        document.getElementById("medicineCart");
+
+    const totalElement =
+        document.getElementById("medicineTotal");
+
+    const countElement =
+        document.getElementById("medicineCartCount");
+
+    if(!cart || !totalElement){
+        return;
+    }
+
+    if(medicineCart.length === 0){
+
+        cart.innerHTML = `
+            <div class="empty-cart">
+                🛒 Your cart is empty.
+            </div>
+        `;
+
+        totalElement.textContent = "Total: ₹0";
+
+        if(countElement){
+            countElement.textContent = "0";
+        }
+
+        return;
+    }
+
+    let total = 0;
+    let count = 0;
+
+    cart.innerHTML =
+        medicineCart.map(function(item){
+
+            const itemTotal =
+                item.price * item.quantity;
+
+            total += itemTotal;
+            count += item.quantity;
+
+            return `
+                <div class="cart-item">
+
+                    <div class="cart-item-name">
+                        💊 ${escapeHtml(item.medicine)}
+                    </div>
+
+                    <small>
+                        Doctor: ${escapeHtml(item.doctor)}
+                    </small>
+
+                    <div style="margin-top:5px;">
+                        ₹${item.price} × ${item.quantity}
+                    </div>
+
+                    <div class="quantity-controls">
+
+                        <button
+                            onclick="changeMedicineQuantity(${item.id}, -1)">
+                            −
+                        </button>
+
+                        <strong>${item.quantity}</strong>
+
+                        <button
+                            onclick="changeMedicineQuantity(${item.id}, 1)">
+                            +
+                        </button>
+
+                        <button
+                            onclick="removeFromCart(${item.id})"
+                            title="Remove">
+                            🗑️
+                        </button>
+
+                    </div>
+
+                    <div style="margin-top:5px;font-weight:600;">
+                        ₹${itemTotal}
+                    </div>
+
+                </div>
+            `;
+
+        }).join("");
+
+    totalElement.textContent =
+        "Total: ₹" + total;
+
+    if(countElement){
+        countElement.textContent = String(count);
+    }
+}
+
+
+/* =========================================================
+   PLACE ORDER
+========================================================= */
+
+function placeMedicineOrder(){
+
+    if(medicineCart.length === 0){
+
+        alert(
+            "Please add at least one medicine to the cart."
+        );
+
+        return;
+    }
+
+    const name =
+        document.getElementById("deliveryName").value.trim();
+
+    const phone =
+        document.getElementById("deliveryPhone").value.trim();
+
+    const address =
+        document.getElementById("deliveryAddress").value.trim();
+
+    const city =
+        document.getElementById("deliveryCity").value.trim();
+
+    const pincode =
+        document.getElementById("deliveryPincode").value.trim();
+
+    if(
+        !name ||
+        !phone ||
+        !address ||
+        !city ||
+        !pincode
+    ){
+
+        alert(
+            "Please enter the complete delivery address."
+        );
+
+        return;
+    }
+
+    if(!/^\d{10,15}$/.test(phone)){
+
+        alert(
+            "Please enter a valid phone number."
+        );
+
+        return;
+    }
+
+    if(!/^\d{6}$/.test(pincode)){
+
+        alert(
+            "Please enter a valid 6 digit pincode."
+        );
+
+        return;
+    }
+
+    let total = 0;
+
+    medicineCart.forEach(function(item){
+        total += item.price * item.quantity;
+    });
+
+    const orderId =
+        "MED" + Date.now();
+
+    const success =
+        document.getElementById(
+            "medicineOrderSuccess"
+        );
+
+    success.style.display = "block";
+
+    success.innerHTML = `
+        <strong>✅ Medicine Order Placed!</strong>
+
+        <br><br>
+
+        Order ID:
+        <strong>${orderId}</strong>
+
+        <br>
+
+        Patient:
+        ${escapeHtml(name)}
+
+        <br>
+
+        Delivery:
+        ${escapeHtml(address)},
+        ${escapeHtml(city)} -
+        ${escapeHtml(pincode)}
+
+        <br>
+
+        Total:
+        <strong>₹${total}</strong>
+
+        <br><br>
+
+        Your medicine delivery request has been recorded
+        for this demo.
+    `;
+
+    medicineCart = [];
+
+    renderMedicineCart();
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =========================
+PRESCRIPTION
+========================= */
+
+async function savePrescription(){
+
+    const patientInput = document.getElementById("prescriptionPatient");
+    const medicineInput = document.getElementById("prescriptionMedicine");
+    const instructionsInput = document.getElementById("prescriptionInstructions");
+
+    const patient = patientInput ? patientInput.value.trim() : "";
+    const medicine = medicineInput ? medicineInput.value.trim() : "";
+    const instructions = instructionsInput ? instructionsInput.value.trim() : "";
+
+    const status =
+        document.getElementById("prescriptionStatus");
+
+
+    if(!patient || !medicine){
+
+        status.className = "status error";
+
+        status.textContent =
+            "Please enter patient and medicine.";
+
+        return;
+    }
+
+
+    try{
+
+        const response =
+            await fetch(API + "/prescriptions",{
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+
+                    patient_name:patient,
+
+                    doctor_name:loggedInUser || document.getElementById("doctorName").textContent.trim(),
+
+                    medicine:medicine,
+
+                    dosage:"",
+
+                    instructions:instructions
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok || !data.success){
+
+            throw new Error(
+                data.error || "Could not save prescription"
+            );
+
+        }
+
+
+        status.className = "status success";
+
+        status.textContent =
+            "Prescription saved successfully!";
+
+        patientInput.value = "";
+        medicineInput.value = "";
+        instructionsInput.value = "";
+
+    }
+
+    catch(error){
+
+        status.className = "status error";
+
+        status.textContent =
+            error.message;
+
+    }
+}
+
+
+/* =========================
+BACK
+========================= */
+
+function goBack(){
+
+    showPage(previousPage);
+
+}
+
+</script>
+
+</body>
+</html>
